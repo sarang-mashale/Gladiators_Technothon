@@ -1,0 +1,13 @@
+<h1 mat-dialog-title align="center">OTP Sent</h1>
+<div mat-dialog-content>
+  <p>Type The OTP Received On The Mail</p>
+  
+  <mat-form-field>
+    <input matInput type="password" placeholder="Verify OTP" [(ngModel)]="password">
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+  <button mat-button [mat-dialog-close]="password" cdkFocusInitial color="primary">Ok</button>
+</div>

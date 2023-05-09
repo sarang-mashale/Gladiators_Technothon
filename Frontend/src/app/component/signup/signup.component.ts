@@ -2,6 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { PopupComponent } from '../popup/popup.component';
+import { MatDialog } from '@angular/material/dialog';
+import { SignupService } from 'src/app/service/signup.service';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -37,12 +41,13 @@ export class SignupComponent implements OnInit {
   size_limit :boolean =false;
   fileToUpload: any;
   secret = 'YESRUNFUNCTION';
+  isSubmited:any=false;
   
 
   async ngAfterViewInit() {
     await this.setupDevices();
   }
-  constructor(private http:HttpClient) {
+  constructor(public dialog: MatDialog,private http:HttpClient,private signupService:SignupService,private router:Router) {
   }
 
   ngOnInit(): void {
@@ -100,18 +105,21 @@ export class SignupComponent implements OnInit {
     // this.isLoading=true;
     console.log(this.isLoading)
     if (!this.signUpForm.valid) {
-      
+      this.isSubmited=true
       return;
     }
-    // this.http.post("https://new-demo-b9add-default-rtdb.firebaseio.com/user.json",this.signUpForm.value).subscribe(res=>{
-    //   console.log(res)
-    // })
-    // this.signupService.signUp(this.signUpForm.value).subscribe(res=>{
-    //   console.log(res)
-    // })
+    this.isSubmited=false
+    this.http.post("https://new-demo-b9add-default-rtdb.firebaseio.com/user.json",this.signUpForm.value).subscribe(res=>{
+      console.log(res)
+    })
+    this.router.navigate(['/verify'])
+    this.signupService.signUp(this.signUpForm.value).subscribe(res=>{
+      console.log(res)
+    })
+    // this.router.navigate(["/success"])
     
     // this.isLoading=true;
-    this.load();
+      this.load();
       console.log(this.signUpForm.value);
       // this.isLoading=false;
       console.log(this.isLoading)
@@ -239,19 +247,21 @@ export class SignupComponent implements OnInit {
     }
   }
 
-  // generate(): void {
-  //   const dialogRef = this.dialog.open(PopupComponent, {
-  //     width: '250px',
-  //   });
+  generate(): void {
+    console.log(this.signUpForm.value.email)
+    const dialogRef = this.dialog.open(PopupComponent, {
+      width: '250px',
+    });
 
-  //   dialogRef.afterClosed().subscribe(password => {
-  //     const isPwdValid = password === this.secret;
-  //     console.log(isPwdValid);
-  //     if (isPwdValid) {
-  //       // run code for correct password 
-  //     } else {
-  //       // run code for wrong password
-  //     }
-  //   });}
+    dialogRef.afterClosed().subscribe(password => {
+      
+      const isPwdValid = password === this.secret;
+      console.log(isPwdValid);
+      if (isPwdValid) {
+        // run code for correct password 
+      } else {
+        // run code for wrong password
+      }
+    });}
 
 }

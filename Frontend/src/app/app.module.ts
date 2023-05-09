@@ -14,11 +14,20 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import { PopupComponent } from './component/popup/popup.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { SucessComponent } from './component/sucess/sucess.component';
+import { VerifyComponent } from './verify/verify.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignupComponent
+    SignupComponent,
+    PopupComponent,
+    LoadingSpinnerComponent,
+    SucessComponent,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatSidenavModule,
     // WebcamModule,
     // MatDialogModule,
+    MatDialogModule,
     FormsModule,
     HttpClientModule
   ],

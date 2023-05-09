@@ -1,0 +1,13 @@
+.hide {
+    display: none;
+  }
+      
+  .myDIV:hover + .hide {
+    display: block;
+    color: red;
+  }
+  
+  
+  .vh-100 {
+    height: 200vh!important;
+}

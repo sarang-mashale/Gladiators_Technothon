@@ -7,7 +7,8 @@
               <div class="row justify-content-center">
                 <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
   
-                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">KYC Verification</p>
+                  <p class="text-center h1 fw-bold mb-5 mx-1 mx-md-4 mt-4">SELF KYC </p>
+                  <div *ngIf="isLoading"><app-loading-spinner></app-loading-spinner></div>
                   <div style="color: blue; margin-left: 26px;margin-top: -20px;">
        
                     <marquee>*Fill your details as per Aadhaar Card  </marquee>
@@ -43,7 +44,7 @@
                     ></canvas>
                     </div>
 
-                  <div align="center" style="margin-top: -215px;"> <button
+                  <div  style="margin-top: -215px;margin-left: 150px;"> <button
                     type="submit"
                     style="margin-right: -55px;"
                     mat-raised-button
@@ -73,79 +74,92 @@
 
               
                     <div style="margin-top: 20px;"class="d-flex flex-row align-items-center mb-4">
-                      <span class="material-icons" style="color: rgb(84, 84, 84); margin-top: 11px;">account_circle</span>
+                      <span class="material-icons" style="color: rgb(84, 84, 84); margin-top: 27px;">account_circle</span>
                       <div class="form-outline flex-fill mb-0">
                         <label class="form-label" for="form3Example1c">Your Name</label>
                         <input type="text" id="form3Example1c" formControlName="name" class="form-control"  placeholder=""/>
-                        <mat-error *ngIf="name?.errors?.['required']">
+                        <mat-error *ngIf="name?.errors?.['required']&& isSubmited">
                           Name is required
                         </mat-error>
                       </div>
                     </div>
-  
-                    <div class="d-flex flex-row align-items-center mb-4">
-                      <span class="material-icons" style="margin-top: 12px;">email</span>
-                      <div class="form-outline flex-fill mb-0">
-                        <label class="form-label" for="form3Example3c">Your Email</label>
-                        <input type="email"  id="form3Example3c" formControlName="email" class="form-control" />
-                        <mat-error *ngIf="email?.errors?.['required']">
-                          Email is required
-                        </mat-error>
-                        <mat-error *ngIf="email?.errors?.['pattern']">
-                          Verify Your email Ex:(arnab@gmail.com)</mat-error
+                    <!-- <span class="material-icons" style="color: rgb(255, 0, 0);">close</span> -->
+                    <!-- <span class="material-icons" style="color: rgb(0, 128, 55);">check</span> -->
+                    <div class=" mb-4 ">
+                      
+                      <label class="form-label" for="form3Example3c" style="margin-left: 22px;">Your Email</label>
+                      <div class="form-outline flex-fill mb-0" style="display: flex;" >
+                        <span class="material-icons" style="margin-top: 7px;">email</span>
+                       
+                       <input type="email"  id="form3Example3c" formControlName="email" class="form-control"  />
+                        <!-- <button (click)="generate()">Verify Email</button> -->
+                        <!-- <div><button
+                          type="button"
+                          mat-raised-button
+                          color="primary"
+                          (click)="generate()"
                         >
+                          Verify Email
+                        </button></div> -->
+                        
                       </div>
+                      <mat-error *ngIf="email?.errors?.['required'] && isSubmited" style="margin-left: 24px;">
+                        Email is required
+                      </mat-error>
+                      <mat-error *ngIf="email?.errors?.['pattern'] && isSubmited" style="margin-left: 24px;">
+                        Verify Your email Ex:(arnab@gmail.com)</mat-error
+                      >
                     </div>
   
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-vcard-fill" viewBox="0 0 16 16" style="margin-top: 27px;">
                         <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4Zm9 1.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4a.5.5 0 0 0-.5.5ZM9 8a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 0-1h-4A.5.5 0 0 0 9 8Zm1 2.5a.5.5 0 0 0 .5.5h3a.5.5 0 0 0 0-1h-3a.5.5 0 0 0-.5.5Zm-1 2C9 10.567 7.21 9 5 9c-2.086 0-3.8 1.398-3.984 3.181A1 1 0 0 0 2 13h6.96c.026-.163.04-.33.04-.5ZM7 6a2 2 0 1 0-4 0 2 2 0 0 0 4 0Z"/>
                       </svg>
                       <div class="form-outline flex-fill mb-0">
                         <label class="form-label" for="form3Example4c">Aadhaar Number</label>
                         <input type="number" id="form3Example4c" formControlName="aadharno" class="form-control" />
-                        <mat-error *ngIf="aadharno?.errors?.['required']">
+                        <mat-error *ngIf="aadharno?.errors?.['required'] && isSubmited">
                           Aadhaar Number is required
                         </mat-error>
-                        <mat-error *ngIf="aadharno?.errors?.['pattern']">
+                        <mat-error *ngIf="aadharno?.errors?.['pattern'] && isSubmited">
                           Verify Aadhar Number Ex:(xxxx-xxxx-xxxx)</mat-error
                         >
                       </div>
                     </div>
   
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16" style="margin-top: 11px;">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-calendar3" viewBox="0 0 16 16" style="margin-top: 27px;">
                       <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"/>
                       <path d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
                       </svg>
                       <div class="form-outline flex-fill mb-0">
                         <label class="form-label" for="form3Example4cd">Date Of Birth</label>
                         <input type="date" id="form3Example4cd" formControlName="dob" class="form-control" />
-                        <mat-error *ngIf="dob?.errors?.['required']">
+                        <mat-error *ngIf="dob?.errors?.['required'] && isSubmited">
                           Date Of Birth is required
                         </mat-error>
                       </div>
                     </div>
   
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <span class="material-icons" style="margin-top: 11px;"> home </span>
+                      <span class="material-icons" style="margin-top: 27px;"> home </span>
                       <div class="form-outline flex-fill mb-0">
                         <label class="form-label" for="form3Example4cd">Address</label>
                         <input type="address" id="form3Example4cd" formControlName="address" class="form-control" />
-                        <mat-error *ngIf="address?.errors?.['required']">
+                        <mat-error *ngIf="address?.errors?.['required'] && isSubmited">
                           Address is required
                         </mat-error>
                       </div>
                     </div>
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <span class="material-icons" style="margin-top: 11px;"> phone_android </span>
+                      <span class="material-icons" style="margin-top: 27px;"> phone_android </span>
                       <div class="form-outline flex-fill mb-0">
                         <label class="form-label" for="form3Example4cd">Mobile Number</label>
                         <input type="number" id="form3Example4cd" class="form-control" formControlName="pannumber" />
-                        <mat-error *ngIf="pannumber?.errors?.['required']">
+                        <mat-error *ngIf="pannumber?.errors?.['required'] && isSubmited">
                           Mobile Number is required
                         </mat-error>
-                        <mat-error *ngIf="pannumber?.errors?.['pattern']">
+                        <mat-error *ngIf="pannumber?.errors?.['pattern'] && isSubmited">
                           Check Your Mobile Number Ex:(+91-XXXX-XXXX-XX)</mat-error
                         >
                       </div>
@@ -153,12 +167,12 @@
 
                     
                     <div class="d-flex flex-row align-items-center mb-4">
-                      <span class="material-icons" style="margin-top: 11px;"> file_upload </span>
+                      <span class="material-icons" style="margin-top: 27px;"> file_upload </span>
                       <div class="form-outline flex-fill mb-0">
                         <label class="form-label" for="form3Example4cd">Upload Aadhaar </label>
                         <input type="file"  accept=".png" placeholder="avatar" formControlName="pannumber" id="form3Example4cd" class="form-control"  formControlName="avatar"
                         (change)="selectFiles($event)" />
-                        <mat-error *ngIf="avatar?.errors?.['required']">
+                        <mat-error *ngIf="avatar?.errors?.['required'] && isSubmited">
                           Aadhaar is required
                         </mat-error>
                       </div>
@@ -170,6 +184,7 @@
                       mat-raised-button
                       color="primary"
                       (click)="onSubmit()"
+                      
                     >
                       Submit
                     </button>
