@@ -78,7 +78,7 @@ export class VerifyComponent implements OnInit {
     const email=localStorage.getItem('email');
     console.log(email)
 
-    this.http.get("https://new-demo-b9add-default-rtdb.firebaseio.com/user.json").subscribe(res=>{
+    this.http.get("http://Localhost:8084/getUserData/{user_id}").subscribe(res=>{
       console.log(res)
       const arrayOfObj = Object.entries(res).map((e) => ({
         [e[0]]: e[1],

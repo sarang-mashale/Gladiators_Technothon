@@ -109,7 +109,7 @@ export class SignupComponent implements OnInit {
       return;
     }
     this.isSubmited=false
-    this.http.post("https://new-demo-b9add-default-rtdb.firebaseio.com/user.json",this.signUpForm.value).subscribe(res=>{
+    this.http.post("http://Localhost:8084/user",this.signUpForm.value).subscribe(res=>{
       console.log(res)
     })
     this.router.navigate(['/verify'])
